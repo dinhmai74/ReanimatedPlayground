@@ -5,9 +5,8 @@
  * You'll likely spend most of your time in this file.
  */
 import React from "react"
-
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { WelcomeScreen, DemoScreen } from "../screens"
+import { DemoScreen, WelcomeScreen } from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
