@@ -1,26 +1,57 @@
-import React, { FunctionComponent as Component } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
-import { Screen, Text } from "../components"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "../models"
+import React, { FunctionComponent as Component } from "react"
+import { Header, Screen, Button } from "../components"
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  Easing,
+} from "react-native-reanimated"
+import styled from "styled-components"
 import { color } from "../theme"
+import { View } from "react-native"
 
-const ROOT: ViewStyle = {
-  backgroundColor: color.palette.black,
-}
+const AnimatedView = styled(Animated.View)`
+  background-color: red;
+  height: 100px;
+  width: 10px;
+`
+
+const Container = styled(View)`
+  flex: 1;
+`
+
+const Wrapper = styled(View)`
+  flex: 1;
+`
 
 export const RandomWidthScreen: Component = observer(function RandomWidthScreen() {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
-  // OR
-  // const rootStore = useStores()
-  
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const randomWidth = useSharedValue(10)
+
+  const config = {
+    duration: 500,
+    easing: Easing.bezier(0.5, 0.01, 0, 1),
+  }
+
+  const viewStyle = useAnimatedStyle(() => {
+    return {
+      width: withTiming(randomWidth.value, config),
+    }
+  })
+
   return (
-    <Screen style={ROOT} preset="scroll">
-      <Text preset="header" tx="randomWidthScreen.header" />
-    </Screen>
+    <Container>
+      <Screen preset="scroll">
+        <Header headerText="RandomWidthScreen" />
+        <Wrapper>
+          <AnimatedView style={viewStyle} />
+          <Button
+            onPress={() => (randomWidth.value = Math.random() * 350)}
+            text="inc"
+            style={{ alignSelf: "center" }}
+          />
+        </Wrapper>
+      </Screen>
+    </Container>
   )
 })

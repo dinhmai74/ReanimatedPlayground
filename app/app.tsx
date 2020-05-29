@@ -9,25 +9,28 @@
  * The app navigation resides in ./app/navigation, so head over there
  * if you're interested in adding screens and navigators.
  */
-import "./i18n"
-import "./utils/ignore-warnings"
-import React, { useState, useEffect, useRef, FunctionComponent as Component } from "react"
+import * as eva from "@eva-design/eva"
 import { NavigationContainerRef } from "@react-navigation/native"
-import { SafeAreaProvider, initialWindowSafeAreaInsets } from "react-native-safe-area-context"
-import * as storage from "./utils/storage"
-import {
-  useBackButtonHandler,
-  RootNavigator,
-  canExit,
-  setRootNavigation,
-  useNavigationPersistence,
-} from "./navigation"
-import { RootStore, RootStoreProvider, setupRootStore } from "./models"
-
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
+import React, { FunctionComponent as Component, useEffect, useRef, useState } from "react"
+import { initialWindowSafeAreaInsets, SafeAreaProvider } from "react-native-safe-area-context"
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
 import { enableScreens } from "react-native-screens"
+import "./i18n"
+import { RootStore, RootStoreProvider, setupRootStore } from "./models"
+import {
+  canExit,
+  RootNavigator,
+  setRootNavigation,
+  useBackButtonHandler,
+  useNavigationPersistence,
+} from "./navigation"
+import "./utils/ignore-warnings"
+import * as storage from "./utils/storage"
+import { EvaIconsPack } from "@ui-kitten/eva-icons"
+
 enableScreens()
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -61,15 +64,20 @@ const App: Component<{}> = () => {
 
   // otherwise, we're ready to render the app
   return (
-    <RootStoreProvider value={rootStore}>
-      <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
-        <RootNavigator
-          ref={navigationRef}
-          initialState={initialNavigationState}
-          onStateChange={onNavigationStateChange}
-        />
-      </SafeAreaProvider>
-    </RootStoreProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <RootStoreProvider value={rootStore}>
+          <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
+            <RootNavigator
+              ref={navigationRef}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </SafeAreaProvider>
+        </RootStoreProvider>
+      </ApplicationProvider>
+    </>
   )
 }
 

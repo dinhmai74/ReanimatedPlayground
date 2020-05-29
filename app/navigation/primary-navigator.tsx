@@ -6,7 +6,7 @@
  */
 import React from "react"
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { DemoScreen, WelcomeScreen } from "../screens"
+import { DemoScreen, RandomWidthScreen, WelcomeScreen } from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -23,6 +23,7 @@ import { DemoScreen, WelcomeScreen } from "../screens"
 export type PrimaryParamList = {
   welcome: undefined
   demo: undefined
+  RandomWidth: undefined
 }
 
 // Documentation: https://github.com/software-mansion/react-native-screens/tree/master/native-stack
@@ -37,7 +38,7 @@ export function PrimaryNavigator() {
       }}
     >
       <Stack.Screen name="welcome" component={WelcomeScreen} />
-      <Stack.Screen name="demo" component={DemoScreen} />
+      <Stack.Screen name="RandomWidth" component={RandomWidthScreen} />
     </Stack.Navigator>
   )
 }
