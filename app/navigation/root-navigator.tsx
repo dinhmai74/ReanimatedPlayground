@@ -7,7 +7,7 @@
 import { NavigationContainer, NavigationContainerRef } from "@react-navigation/native"
 import React from "react"
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { RandomWidthScreen, WelcomeScreen, MovingCardScreen } from "../screens"
+import { RandomWidthScreen, WelcomeScreen, MovingCardScreen, TinderCardScreen } from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -23,6 +23,7 @@ export type RootParamList = {
   welcome: undefined
   RandomWidth: undefined
   MovingCard: undefined
+  tinderCardScreen: undefined
 }
 
 const Stack = createNativeStackNavigator<RootParamList>()
@@ -33,6 +34,7 @@ const RootStack = () => {
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="RandomWidth" component={RandomWidthScreen} />
       <Stack.Screen name="MovingCard" component={MovingCardScreen} />
+      <Stack.Screen name="tinderCardScreen" component={TinderCardScreen} />
     </Stack.Navigator>
   )
 }

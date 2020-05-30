@@ -1,21 +1,21 @@
+import { Card } from "@ui-kitten/components"
 import { observer } from "mobx-react-lite"
 import React, { FunctionComponent as Component } from "react"
-import { Screen, Text } from "../components"
-import { Card } from "@ui-kitten/components"
-import styled from "styled-components"
-import { spacing } from "../theme"
 import { PanGestureHandler } from "react-native-gesture-handler"
 // @ts-ignore
 import Animated, {
   // @ts-ignore
-  useSharedValue,
-  // @ts-ignore
-  withSpring,
+  useAnimatedGestureHandler,
   // @ts-ignore
   useAnimatedStyle,
   // @ts-ignore
-  useAnimatedGestureHandler,
+  useSharedValue,
+  // @ts-ignore
+  withSpring,
 } from "react-native-reanimated"
+import styled from "styled-components"
+import { Screen, Text } from "../components"
+import { spacing } from "../theme"
 
 const Container = styled(Screen)(p => ({
   paddingHorizontal: spacing[6],

@@ -13,7 +13,7 @@ const Container = styled(View)(p => ({
   backgroundColor: p.theme["color-basic-100"],
 }))
 
-const screens = ["RandomWidth", "MovingCard"]
+const screens = ["RandomWidth", "MovingCard", "tinderCardScreen"]
 
 export const WelcomeScreen: Component = observer(function WelcomeScreen() {
   const navigation = useNavigation()
