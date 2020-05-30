@@ -30,6 +30,7 @@ import {
 import "./utils/ignore-warnings"
 import * as storage from "./utils/storage"
 import { EvaIconsPack } from "@ui-kitten/eva-icons"
+import { ThemeProvider } from "styled-components"
 
 enableScreens()
 
@@ -66,17 +67,19 @@ const App: Component<{}> = () => {
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <RootStoreProvider value={rootStore}>
-          <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
-            <RootNavigator
-              ref={navigationRef}
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />
-          </SafeAreaProvider>
-        </RootStoreProvider>
-      </ApplicationProvider>
+      <ThemeProvider theme={eva.light}>
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <RootStoreProvider value={rootStore}>
+            <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
+              <RootNavigator
+                ref={navigationRef}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </SafeAreaProvider>
+          </RootStoreProvider>
+        </ApplicationProvider>
+      </ThemeProvider>
     </>
   )
 }

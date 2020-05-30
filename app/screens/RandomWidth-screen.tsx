@@ -1,15 +1,14 @@
 import { observer } from "mobx-react-lite"
 import React, { FunctionComponent as Component } from "react"
-import { Header, Screen, Button } from "../components"
+import { View } from "react-native"
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
   Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from "react-native-reanimated"
 import styled from "styled-components"
-import { color } from "../theme"
-import { View } from "react-native"
+import { Button, Screen } from "../components"
 
 const AnimatedView = styled(Animated.View)`
   background-color: red;
@@ -40,18 +39,15 @@ export const RandomWidthScreen: Component = observer(function RandomWidthScreen(
   })
 
   return (
-    <Container>
-      <Screen preset="scroll">
-        <Header headerText="RandomWidthScreen" />
-        <Wrapper>
-          <AnimatedView style={viewStyle} />
-          <Button
-            onPress={() => (randomWidth.value = Math.random() * 350)}
-            text="inc"
-            style={{ alignSelf: "center" }}
-          />
-        </Wrapper>
-      </Screen>
-    </Container>
+    <Screen preset="scroll">
+      <Wrapper>
+        <AnimatedView style={viewStyle} />
+        <Button
+          onPress={() => (randomWidth.value = Math.random() * 350)}
+          text="inc"
+          style={{ alignSelf: "center" }}
+        />
+      </Wrapper>
+    </Screen>
   )
 })

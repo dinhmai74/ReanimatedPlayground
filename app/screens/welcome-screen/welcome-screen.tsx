@@ -1,27 +1,35 @@
-import React, { FunctionComponent as Component } from "react"
-import { View, Image, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { List, ListItem } from "@ui-kitten/components"
 import { observer } from "mobx-react-lite"
-import { Button, Header, Screen, Text, Wallpaper } from "../../components"
-import { color, spacing } from "../../theme"
-import styled from "styled-components"
+import React, { FunctionComponent as Component } from "react"
+import { View } from "react-native"
+import styled, { useTheme } from "styled-components"
+import { Screen } from "../../components"
+import { spacing } from "../../theme"
 
-const Container = styled(View)`
-  flex: 1;
-  padding: ${spacing[6]}px;
-`
+const Container = styled(View)(p => ({
+  flex: 1,
+  padding: spacing[6],
+  backgroundColor: p.theme["color-basic-100"],
+}))
 
-const screens = ["RandomWidth"]
+const screens = ["RandomWidth", "MovingCard"]
 
 export const WelcomeScreen: Component = observer(function WelcomeScreen() {
   const navigation = useNavigation()
+  const color = useTheme()
+  const renderItem = ({ item }) => (
+    <ListItem title={item} onPress={() => navigation.navigate(item)} key={item} />
+  )
 
   return (
     <Container>
-      <Screen preset="scroll" backgroundColor={color.transparent}>
-        {screens.map((v, i) => (
-          <Button text={v} key={v} onPress={() => navigation.navigate(v)} />
-        ))}
+      <Screen>
+        <List
+          data={screens}
+          renderItem={renderItem}
+          style={{ backgroundColor: color["color-basic-100"] }}
+        />
       </Screen>
     </Container>
   )

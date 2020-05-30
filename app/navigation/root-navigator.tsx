@@ -4,11 +4,10 @@
  * and a "main" flow (which is contained in your PrimaryNavigator) which the user
  * will use once logged in.
  */
-import React from "react"
 import { NavigationContainer, NavigationContainerRef } from "@react-navigation/native"
-
+import React from "react"
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { PrimaryNavigator } from "./primary-navigator"
+import { RandomWidthScreen, WelcomeScreen, MovingCardScreen } from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -21,28 +20,19 @@ import { PrimaryNavigator } from "./primary-navigator"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
 export type RootParamList = {
-  primaryStack: undefined
+  welcome: undefined
+  RandomWidth: undefined
+  MovingCard: undefined
 }
 
 const Stack = createNativeStackNavigator<RootParamList>()
 
 const RootStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        gestureEnabled: true,
-
-        stackPresentation: "modal",
-      }}
-    >
-      <Stack.Screen
-        name="primaryStack"
-        component={PrimaryNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
+    <Stack.Navigator>
+      <Stack.Screen name="welcome" component={WelcomeScreen} />
+      <Stack.Screen name="RandomWidth" component={RandomWidthScreen} />
+      <Stack.Screen name="MovingCard" component={MovingCardScreen} />
     </Stack.Navigator>
   )
 }
